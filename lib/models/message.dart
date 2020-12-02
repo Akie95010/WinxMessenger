@@ -56,8 +56,7 @@ List<Message> chats = [
     recipient: currentUser,
     sender: roxy,
     time: '12:30 PM',
-    text:
-        'Can I talk to you about whether I can take a dog to Alfea?',
+    text: 'Can I talk to you about whether I can take a dog to Alfea?',
     unread: false,
   ),
   Message(
@@ -106,6 +105,72 @@ List<Message> messages = [
     unread: true,
   ),
 
+  Message(
+    recipient: currentUser,
+    sender: aisha,
+    time: '3:30 PM',
+    text: 'Why did you miss your workout?',
+    unread: true,
+  ),
+  Message(
+    recipient: aisha,
+    sender: currentUser,
+    time: '2:40 PM',
+    text: 'Sorry, but I won\'t be able to go to the gym today',
+    unread: true,
+  ),
 
+  Message(
+    recipient: currentUser,
+    sender: musa,
+    time: '1:30 PM',
+    text: 'Your rabbit ruined my headphones!',
+    unread: true,
+  ),
 
+  Message(
+    recipient: currentUser,
+    sender: stella,
+    time: '3:30 PM',
+    text: 'Do you remember who I kissed with at the last party?',
+    unread: true,
+  ),
+  Message(
+    recipient: stella,
+    sender: currentUser,
+    time: '2:40 PM',
+    text: 'How do you feel?',
+    unread: true,
+  ),
+
+  Message(
+    recipient: currentUser,
+    sender: roxy,
+    time: '12:30 PM',
+    text: 'Can I talk to you about whether I can take a dog to Alfea?',
+    unread: true,
+  ),
+
+  Message(
+    recipient: currentUser,
+    sender: techna,
+    time: '11:30 PM',
+    text: 'Yes, of course, I will fix the headphones that Kiko broke',
+    unread: true,
+  ),
+  Message(
+    recipient: techna,
+    sender: currentUser,
+    time: '10:40 PM',
+    text: 'Could you help me with the headphones?',
+    unread: true,
+  ),
+
+  Message(
+    recipient: currentUser,
+    sender: icy,
+    time: '12:40 PM',
+    text: 'How are you, sweetie?)',
+    unread: true,
+  ),
 ];

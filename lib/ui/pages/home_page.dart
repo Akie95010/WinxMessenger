@@ -20,24 +20,12 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         brightness: Brightness.dark,
         elevation: 8,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          color: Colors.white,
-          onPressed: () {},
-        ),
         title: Text(
           Strings.homePageTitle,
           style: TextStyle(
             color: Colors.white,
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            color: Colors.white,
-            onPressed: () {},
-          ),
-        ],
       ),
       body: _buildListOfChats(),
     );

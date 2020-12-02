@@ -45,7 +45,7 @@ class _ChatPageState extends State<ChatPage> {
     return ListView.builder(
       reverse: true,
       padding: EdgeInsets.all(20),
-      itemCount: messages.length,
+      itemCount: getMessages().length,
       itemBuilder: (BuildContext context, int index) {
         List<Message> chatMessages = getMessages();
         if (chatMessages.length != 0) {

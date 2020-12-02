@@ -1,3 +1,5 @@
+import 'package:email_app/resources/strings.dart';
+
 class User {
   final int id;
   final String name;
@@ -16,7 +18,7 @@ class User {
 final User currentUser = User(
   id: 0,
   name: 'Bloom',
-  imageUrl: 'assets/images/bloom.jpg ',
+  imageUrl:  Strings.bloomImage,
   isOnline: true,
 );
 
@@ -24,48 +26,48 @@ final User currentUser = User(
 final User kiko = User(
   id: 1,
   name: 'Kiko',
-  imageUrl: 'assets/images/kiko.jpg',
+  imageUrl: Strings.kikoImage,
   isOnline: true,
 );
 final User flora = User(
   id: 2,
   name: 'Flora',
-  imageUrl: 'assets/images/flora.jpg',
+  imageUrl: Strings.floraImage,
   isOnline: true,
 );
 final User stella = User(
   id: 3,
   name: 'Stella',
-  imageUrl: 'assets/images/stella.jpg',
+  imageUrl: Strings.stellaImage,
   isOnline: false,
 );
 final User techna = User(
   id: 4,
   name: 'Techna',
-  imageUrl: 'assets/images/tecna.jpg',
+  imageUrl: Strings.technaImage,
   isOnline: false,
 );
 final User musa = User(
   id: 5,
   name: 'Musa',
-  imageUrl: 'assets/images/musa.jpg',
+  imageUrl: Strings.musaImage,
   isOnline: true,
 );
 final User aisha = User(
   id: 6,
   name: 'Aisha',
-  imageUrl: 'assets/images/aisha.png',
+  imageUrl: Strings.aishaImage,
   isOnline: false,
 );
 final User roxy = User(
   id: 7,
   name: 'Roxy',
-  imageUrl: 'assets/images/roxy.jpg',
+  imageUrl: Strings.roxyImage,
   isOnline: true,
 );
 final User icy = User(
   id: 8,
   name: 'Icy',
-  imageUrl: 'assets/images/icy.jpg',
+  imageUrl: Strings.icyImage,
   isOnline: false,
 );
