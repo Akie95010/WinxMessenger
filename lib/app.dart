@@ -1,4 +1,5 @@
-import 'package:email_app/ui/pages/home_page.dart';
+
+import 'package:email_app/ui/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -8,10 +9,12 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Email',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
+        primaryColor: Colors.pink.shade300,
+        backgroundColor: Colors.pink.shade50,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }

@@ -1,17 +1,22 @@
+import 'package:email_app/models/current_user.dart';
 import 'package:email_app/models/message.dart';
+import 'package:email_app/models/user.dart';
 import 'package:email_app/resources/strings.dart';
+import 'package:email_app/services/messages_service.dart';
+import 'package:email_app/util/date_util.dart';
+import 'package:email_app/util/messages_list_util.dart';
 import 'package:flutter/material.dart';
 
-import 'chats.dart';
+import 'chat_page.dart';
 import 'detail_page.dart';
 
-class HomePage extends StatefulWidget {
-
+class AllChatsPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _AllChatsPageState createState() => _AllChatsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _AllChatsPageState extends State<AllChatsPage> {
+  final MessageService _messageService = MessageService();
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +37,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildListOfChats() {
+    List<Message> currentUserChats = _messageService.getChatsOfCurrentUser();
     return ListView.builder(
-      itemCount: chats.length,
+      itemCount: currentUserChats.length,
       itemBuilder: (BuildContext context, int index) {
         Message chat = chats[index];
         return _buildChatListView(chat);
@@ -42,6 +48,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildChatListView(Message chat) {
+    User user = chat.sender.name != CurrentUser.user.name
+        ? chat.sender
+        : chat.recipient;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Center(
@@ -49,27 +58,27 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.all(5.0),
             child: InkWell(
                 onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ChatPage(
-                          user: chat.sender,
-                        ),
-                      ),
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ChatPage(
+                      user: user,
                     ),
+                  ),
+                ),
                 child: Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 1,
                       vertical: 2,
                     ),
-                    child: _buildListViewItem(chat)))),
+                    child: _buildListViewItem(chat, user)))),
       ),
     );
   }
 
-  Widget _buildListViewItem(Message chat) {
+  Widget _buildListViewItem(Message chat, User user) {
     return Row(
       children: <Widget>[
-        _buildAvatar(context, chat),
+        _buildAvatar(context, chat, user),
         Container(
           width: MediaQuery.of(context).size.width * 0.65,
           padding: EdgeInsets.only(
@@ -77,11 +86,9 @@ class _HomePageState extends State<HomePage> {
           ),
           child: Column(
             children: <Widget>[
-              _buildUserInfoRow(chat),
-              SizedBox(
-                height: 15,
-              ),
-              _buildTextContainer(chat),
+              _buildUserInfoRow(chat, user),
+
+              _buildTextContainer(chat, user),
             ],
           ),
         ),
@@ -101,30 +108,44 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
-  Widget _buildTextContainer(Message chat) {
+  Widget _buildTextContainer(Message chat, User user) {
     return Container(
-      alignment: Alignment.topLeft,
-      child: Text(
-        chat.text,
-        style: TextStyle(
-          fontSize: 13,
-          color: Colors.black54,
-        ),
-        overflow: TextOverflow.ellipsis,
-        maxLines: 2,
-      ),
-    );
+        alignment: Alignment.topLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              chat.sender.name,
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.black54,
+                fontWeight: FontWeight.bold,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+            Text(
+              chat.text,
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.black54,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+          ],
+        ));
   }
 
-  Widget _buildAvatar(BuildContext context, Message chat) {
+  Widget _buildAvatar(BuildContext context, Message chat, User user) {
     return Container(
       padding: EdgeInsets.all(2),
       child: GestureDetector(
         child: Hero(
-          tag: chat.sender.name,
+          tag: user.name,
           child: CircleAvatar(
             radius: 35,
-            backgroundImage: AssetImage(chat.sender.imageUrl),
+            backgroundImage: AssetImage(user.imageUrl),
           ),
         ),
         onTap: () {
@@ -137,36 +158,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildUserInfoRow(Message chat) {
+  Widget _buildUserInfoRow(Message chat, User user) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Row(
           children: <Widget>[
             Text(
-              chat.sender.name,
+              user.name,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            chat.sender.isOnline
+            user.isOnline
                 ? Container(
-                    margin: const EdgeInsets.only(left: 5),
-                    width: 7,
-                    height: 7,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  )
+              margin: const EdgeInsets.only(left: 5),
+              width: 7,
+              height: 7,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).primaryColor,
+              ),
+            )
                 : Container(
-                    child: null,
-                  ),
+              child: null,
+            ),
           ],
         ),
         Text(
-          chat.time,
+          DateUtil.getTimeString(chat.time),
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w300,

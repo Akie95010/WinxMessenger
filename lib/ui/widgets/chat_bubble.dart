@@ -1,5 +1,5 @@
 import 'package:email_app/models/message.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:email_app/util/date_util.dart';
 import 'package:flutter/material.dart';
 
 class ChatBubble extends StatelessWidget {
@@ -58,7 +58,7 @@ class ChatBubble extends StatelessWidget {
           width: 10,
         ),
         Text(
-          message.time,
+          DateUtil.getTimeString(message.time),
           style: TextStyle(
             fontSize: 12,
             color: Colors.black45,
@@ -107,7 +107,7 @@ class ChatBubble extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Text(
-          message.time,
+          DateUtil.getTimeString(message.time),
           style: TextStyle(
             fontSize: 12,
             color: Colors.black45,
